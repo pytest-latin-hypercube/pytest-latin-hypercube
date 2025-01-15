@@ -5,7 +5,7 @@ def data_set(request):
     print(request)
     return request.param
 
-@pytest.fixture(params=[i for i in range(2, 4)])
+@pytest.fixture(params=[i for i in range(2)])
 def data_set2(request):
     print(request)
     return request.param
