@@ -23,7 +23,7 @@ def LatinHypercube(args: dict, seed: int = 847, K: int = 1):
             keys.append(key)
             if len(value) != N:
                 raise ValueError("All parameters' spaces are required to be the same length")
-            np.random.seed = seed
+            np.random.seed(seed)
             shuffled_intervals = np.random.permutation(value)
             for j, val in enumerate(shuffled_intervals):
                 samples[j][k*N + i] = val
@@ -45,17 +45,16 @@ def LatinHyperRectangle(args: dict, seed: int = 847, K: int = 1):
 
     for k in range(K):
         for i, (key, value) in enumerate(args.items()):
-            keys.append(key)
             shuffled_intervals = []
             if len(value) < N:
                 curr_length = len(value)
                 while curr_length < N:
-                    np.random.seed = seed
+                    np.random.seed(seed)
                     shuffled_intervals.extend(np.random.permutation(value))
                     curr_length = len(shuffled_intervals)
                 shuffled_intervals = shuffled_intervals[:N]    
             else:
-                np.random.seed = seed
+                np.random.seed(seed)
                 shuffled_intervals = np.random.permutation(value)
 
             for j, val in enumerate(shuffled_intervals):
