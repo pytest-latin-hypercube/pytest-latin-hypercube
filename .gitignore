@@ -169,3 +169,4 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+tests/__pycache__/test_pytest.cpython-310-pytest-8.3.3.pyc
