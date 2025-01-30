@@ -3,7 +3,8 @@ import m4r.latinhypercube
 import inspect
 
 
-@pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0]}, {"x": [0, 1, 2], "y": [0, 1, 2]}, {"x": []}, {"x": [0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}])
+@pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0]}, {"x": [0, 1, 2], "y": [
+                         0, 1, 2]}, {"x": []}, {"x": [0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}])
 def test_latinhypercube_length(x):
     M = len(x)
     N = len(next(iter(x.values()), []))
@@ -28,13 +29,16 @@ def test_latinhypercube_number_of_iterations(k):
     x = {"x": [0, 1, 2], "y": [0, 1, 2], "z": [0, 1, 2]}
     M = len(x)
     N = len(next(iter(x.values()), []))
-    keys, values = m4r.latinhypercube.latin_hypercube(x, number_of_iterations=k)
+    keys, values = m4r.latinhypercube.latin_hypercube(
+        x, number_of_iterations=k)
     assert len(keys) == M
-    assert len(values) == N*k
+    assert len(values) == N * k
     if len(values) > 0:
         assert len(values[0]) == M
 
-@pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0, 1, 2], "y": [0, 1, 2]}, {"x": []}, {"x": [0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}])
+
+@pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0, 1, 2], "y": [0, 1, 2]}, {
+                         "x": []}, {"x": [0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}])
 def test_latinhypercube_latinproperty(x):
     argnames, argvalues = m4r.latinhypercube.latin_hypercube(x)
     for i, arg in enumerate(argnames):
@@ -48,7 +52,8 @@ def test_latinhypercube_latinproperty(x):
             assert values[i] == values2[i]
 
 
-@pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0, 1], "y": [0, 1, 2]}, {"x": []}, {"x": [0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}, {"x": [0, 1, 2, 4], 2: [0, 1], "z": [0, 2, 5]}])
+@pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0, 1], "y": [0, 1, 2]}, {"x": []}, {"x": [
+                         0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}, {"x": [0, 1, 2, 4], 2: [0, 1], "z": [0, 2, 5]}])
 def test_latinhyperrectangle_lengths(x):
     M = len(x)
     N = len(next(iter(x.values()), []))
@@ -79,14 +84,16 @@ def test_latinhyperrectangle_number_of_iterations(k):
     for value in x.values():
         if len(value) > N:
             N = len(value)
-    keys, values = m4r.latinhypercube.latin_hyperrectangle(x, number_of_iterations=k)
+    keys, values = m4r.latinhypercube.latin_hyperrectangle(
+        x, number_of_iterations=k)
     assert len(keys) == M
-    assert len(values) == N*k
+    assert len(values) == N * k
     if len(values) > 0:
         assert len(values[0]) == M
 
 
-@pytest.mark.parametrize(["func", "args"], [[lambda x, y : x + y, [[1, 2, 3], [4, 5, 6]]]])
+@pytest.mark.parametrize(["func", "args"],
+                         [[lambda x, y: x + y, [[1, 2, 3], [4, 5, 6]]]])
 def test_output_is_valid_input(func, args):
     args_dict = inspect.getcallargs(func, *args)
     argnames, argvalues = m4r.latinhypercube.latin_hypercube(args_dict)
@@ -97,7 +104,8 @@ def test_output_is_valid_input(func, args):
         assert False
 
 
-@m4r.latinhypercube.LHparameterised({"x": [0, 1, 2], "y": [0, 1, 2], "z": [0, 1, 2]}, seed=847)
+@m4r.latinhypercube.LHparameterised(
+    {"x": [0, 1, 2], "y": [0, 1, 2], "z": [0, 1, 2]}, seed=847)
 def test_latinhypercube_parameterised(x, y, z):
     assert x in [0, 1, 2]
     assert y in [0, 1, 2]
