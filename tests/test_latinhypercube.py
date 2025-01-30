@@ -46,7 +46,6 @@ def test_latinhypercube_latinproperty(x):
         values2 = sorted(values2)
         for i in range(len(values)):
             assert values[i] == values2[i]
-        
 
 
 @pytest.mark.parametrize("x", [{"x": [0, 1, 2]}, {"x": [0, 1], "y": [0, 1, 2]}, {"x": []}, {"x": [0, 1, 2, 4], 2: [0, 1, 2, 3], "z": [0, 2, 5, 1]}, {"x": [0, 1, 2, 4], 2: [0, 1], "z": [0, 2, 5]}])
