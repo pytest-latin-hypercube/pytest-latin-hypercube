@@ -15,7 +15,7 @@ def latin_hypercube(args: dict, seed: int = 847,
     """Given a parameter space of number_of_arguments parameters each taking N values, return a Latin Hypercube sample."""
 
     keys = []
-    np.random.seed(seed)
+    rng = np.random.default_rng(seed)
 
     for i, (key, value) in enumerate(args.items()):
         if i == 0:
@@ -25,7 +25,7 @@ def latin_hypercube(args: dict, seed: int = 847,
         if len(value) != longest_parameter_space:
             raise ValueError(
                 "All parameters' spaces are required to be the same length")
-        perm = np.random.permutation(value * number_of_iterations)
+        perm = rng.permutation(value * number_of_iterations)
         perms.append(perm)
 
     return keys, list(zip(*perms))
@@ -36,7 +36,7 @@ def latin_hyperrectangle(args: dict, seed: int = 847,
     """Given a parameter space of longest_parameter_space parameters each taking number_of_arguments values, return a Latin Hypercube sample."""
     keys = []
     longest_parameter_space = 0
-    np.random.seed(seed)  # change this to something non-global
+    rng = np.random.default_rng(seed)
     for key, value in args.items():
         keys.append(key)
         if len(value) > longest_parameter_space:
@@ -44,7 +44,7 @@ def latin_hyperrectangle(args: dict, seed: int = 847,
     samples = []
     shuffled_args = {
         key: list(
-            np.random.permutation(
+            rng.permutation(
                 value *
                 number_of_iterations)) for key,
         value in args.items()}
@@ -57,7 +57,7 @@ def latin_hyperrectangle(args: dict, seed: int = 847,
         for key, value in args.items():
             if len(shuffled_args[key]) == 0:
                 shuffled_args[key] = list(
-                    np.random.permutation(
+                    rng.permutation(
                         value * number_of_iterations))
 
         if iter > max_iterations:
