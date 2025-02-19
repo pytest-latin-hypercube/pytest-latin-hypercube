@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "m4r"
+name = "pytest-latin-hypercube"
 version = "0.1"
 dependencies = ["numpy", "pytest"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["m4r"]
+packages = ["pytest_latin_hypercube"]
