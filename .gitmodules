@@ -1,0 +1,6 @@
+[submodule "pytest-latin-hypercube-docs"]
+	path = pytest-latin-hypercube-docs
+	url = git@github.com:pytest-latin-hypercube/pytest-latin-hypercube-docs.git
+[submodule "docs"]
+	path = docs
+	url = git@github.com:pytest-latin-hypercube/pytest-latin-hypercube-docs.git
