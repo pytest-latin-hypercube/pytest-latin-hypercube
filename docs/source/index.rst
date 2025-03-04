@@ -6,12 +6,15 @@
 pytest-latin-hypercube documentation
 ====================================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+This is the documentation for `pytest-latin-hypercube`, a python package designed to run pytest tests using a Latin Hypercube Sampling (LHS) strategy.
+This strategy involves testing every possible parameter value at least once, rather than testing every possible combination of parameter values.
 
+The goal of this project is to allow for more efficient testing of code by reducing the number of tests that need to be run, while still maintaining a high level of confidence.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   
+   maths
+   pytest_latin_hypercube
 
