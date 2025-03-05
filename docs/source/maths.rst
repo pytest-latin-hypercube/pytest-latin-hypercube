@@ -28,7 +28,7 @@ An example of a 4 by 4 Latin square is here:
       -
       -
 
-A Latin hypercube is a generalisation of a Latin square to an arbitrary number of dimensions.
+A *Latin hypercube* is a generalisation of a Latin square to grid of an arbitrary number of dimensions, where each axis contains exactly one sample. Usually, the samples are drawn from a continuous distribution, and the  
 
 This package implements Latin Hypercube Sampling (LHS) for pytest. LHS is a statisical method for generating samples from multi-dimensional sample spaces.
 LHS works as follows:
