@@ -25,6 +25,7 @@ doc = [
     "sphinxcontrib-proof",
     "sphinx-autobuild",
     "sphinx-design",
+    "sphinx-rtd-theme",
 ]
 
 [tool.hatch.build.targets.wheel]
