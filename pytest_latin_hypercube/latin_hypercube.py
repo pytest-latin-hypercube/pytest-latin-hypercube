@@ -1,7 +1,7 @@
 import pytest
 from numpy.random import default_rng
 import warnings
-
+import numpy as np
 
 def LHparameterised(args: dict, seed: int = 847):
     """Decorator that allows for Latin Hypercube sampling of parameters.
@@ -81,12 +81,23 @@ def latin_hyperrectangle(args: dict,
     shuffled_args = {key: list(rng.permutation(value * number_of_iterations))
                      for key, value in args.items()}
     iter = 0
+
+    def is_sample_in_samples(sample, samples):
+        for s in samples:
+            if all(
+                np.array_equal(s_elem, sample_elem) if isinstance(s_elem, np.ndarray) 
+                else (s_elem == sample_elem)
+                for s_elem, sample_elem in zip(s, sample)
+            ):
+                return True
+        return False
+
     while len(samples) < longest_parameter_space * number_of_iterations:
         iter += 1
         max_iter = max_iteration_factor * longest_parameter_space \
             * number_of_iterations
         sample = ([shuffled_args[key].pop() for key in keys])
-        if sample not in samples:
+        if not is_sample_in_samples(sample, samples):
             samples.append(sample)
         for key, value in args.items():
             if len(shuffled_args[key]) == 0:

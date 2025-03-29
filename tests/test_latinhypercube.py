@@ -79,3 +79,12 @@ def test_max_iteration_warning(x):
 def test_latinhypercube_parameterised(x, y, z):
     assert x in [0, 1, 2]
     assert y in [0, 1, 2]
+
+def test_firedrake_parameters():
+    x = {"cell": ["interval", "triangle", "quadrilateral", "tetrahedron", "prism", "hexahedron"],
+                  "refinements_per_level": [1, 2],
+                  "vector": [False, True],
+                  "space": ["CG", "DG"],
+                  "transfer_type": ["injection", "restriction", "prolongation"]}
+    l = latin_hyperrectangle(x)
+    print(l)
