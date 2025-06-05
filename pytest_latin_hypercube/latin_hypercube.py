@@ -80,15 +80,17 @@ def latin_hyperrectangle(args: dict,
         is equal to the product of the length of the longest parameter space
         and the number of iterations.
     """
-    keys = []
+    keys = list(args.keys())
     longest_parameter_space = 0
     rng = default_rng(seed)
-    for key, value in args.items():
-        keys.append(key)
-        if len(value) > longest_parameter_space:
-            longest_parameter_space = len(value)
+    longest_parameter_space = max(map(len, args.values()))
     samples = []
-    shuffled_args = {key: list(rng.permutation(value * number_of_iterations))
+    
+    def shuffle_list(lst):
+        rng.shuffle(lst)
+        return lst
+
+    shuffled_args = {key: list(shuffle_list(value * number_of_iterations))
                      for key, value in args.items()}
     iter = 0
 
@@ -111,8 +113,7 @@ def latin_hyperrectangle(args: dict,
             samples.append(sample)
         for key, value in args.items():
             if len(shuffled_args[key]) == 0:
-                shuffled_args[key] = list(
-                    rng.permutation(value * number_of_iterations))
+                shuffled_args[key] = shuffle_list(value * number_of_iterations)
 
         if iter > (max_iteration_factor * longest_parameter_space
                    * number_of_iterations):
