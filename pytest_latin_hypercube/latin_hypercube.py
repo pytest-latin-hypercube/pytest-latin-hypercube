@@ -3,7 +3,7 @@ from numpy.random import default_rng
 import warnings
 import numpy as np
 
-def LHparameterised(args: dict, seed: int = 847):
+def LHparameterised(args: dict, seed: int = 847, number_of_iterations: int = 1, max_iteration_factor: int = 10):
     """Decorator that allows for Latin Hypercube sampling of parameters.
 
     Parameters
@@ -13,6 +13,13 @@ def LHparameterised(args: dict, seed: int = 847):
         list of the values that each parameter can take.
     seed : int
         The seed for the random number generator used to generate samples.
+    number_of_iterations: int
+        The number of iterations sto perform. The number of samples returned is
+        this multiplied by the length of the longest parameter space.
+    max_iteration_factor: int
+        The maximum number of iterations to perform before returning a partial
+        sample is given by the product of the length of the longest parameter
+        space, the number of iterations and this factor.
 
     Returns
     -------
@@ -22,7 +29,10 @@ def LHparameterised(args: dict, seed: int = 847):
         Latin Hypercube sampling of the parameters.
     """
     def wrapper(test_func):
-        argnames, argvalues = latin_hyperrectangle(args, seed=seed)
+        argnames, argvalues = latin_hyperrectangle(args,
+                                                   seed,
+                                                   number_of_iterations,
+                                                   max_iteration_factor)
         return pytest.mark.parametrize(argnames, argvalues)(test_func)
     return wrapper
 
