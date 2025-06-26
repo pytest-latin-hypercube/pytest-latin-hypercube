@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "pytest-latin-hypercube"
 version = "1.0"
 description="""Implementation of Latin Hypercube Sampling for pytest."""
-readme = "source/README.md"
+readme = "docs/README.md"
 license = "MIT"
 authors = [
     { name = "Shuaib Ahmed", email = "shuaib2001.sa@gmail.com" },
